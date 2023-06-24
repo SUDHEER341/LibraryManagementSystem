@@ -40,6 +40,17 @@ namespace LibraryManagementSystem
             Console.WriteLine("====================================================================================================");
             
             objLibrary.GetBorrowedBooksList();
+
+            Console.WriteLine("====================================================================================================");
+
+            Console.WriteLine("Books by author  : ");
+            SqlDataReader booksByAuthor = objLibrary.GetBooksByAuthor("RavindraNath Tagore");
+
+            while (booksByAuthor.Read())
+            {
+                Console.WriteLine("Title: " + booksByAuthor["Title"] + ", Author: " + booksByAuthor["Author"] + ", Genre: " + booksByAuthor["Genre"]);
+            }
+            booksByAuthor.Close();
         }
     }
 }

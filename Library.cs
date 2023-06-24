@@ -178,5 +178,20 @@ namespace LibraryManagementSystem
             }
         }
 
+        // DISPLAY BOOKS BY AUTHOR
+        public SqlDataReader GetBooksByAuthor(string author)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string get_Book_By_Author = "select * from Books where Author =@Author";
+            SqlCommand command = new SqlCommand(get_Book_By_Author, connection);
+            command.Parameters.AddWithValue("@Author", author);
+
+            SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+            return reader;
+        }
+
+
     }
 }
