@@ -84,5 +84,52 @@ namespace LibraryManagementSystem
             return 0;
         }
 
+        //COUNT AVAILABLE BOOKS EXCEPT BORROWED BOOKS
+        public void GetAvailableBooksCount()
+        {
+            int availableBooks = 0;
+            using (var command = new SqlCommand("select count(*) from Books where IsBorrowed !=1 ", connection))
+
+            {
+                connection.Open();
+                availableBooks = (int)command.ExecuteScalar();
+                connection.Close();
+            }
+
+            Console.WriteLine($"Available books count : {availableBooks}");
+
+        }
+        // DISPLAY AVAILABLE BOOKS IN LIBRARY
+        public int GetAvailableBooksList()
+        {
+            GetAvailableBooksCount();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT * FROM Books where IsBorrowed !=1";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        Console.WriteLine("Books in the Library:");
+
+                        while (reader.Read())
+                        {
+                            int bookId = (int)reader["BookId"];
+                            string title = (string)reader["Title"];
+                            string author = (string)reader["Author"];
+                            string genre = (string)reader["Genre"];
+                            bool isBorrowed = (bool)reader["IsBorrowed"];
+
+                            Console.WriteLine("BookId: " + bookId + ", Title: " + title + ", Author: " + author + ", Genre: " + genre + ", IsBorrowed: " + isBorrowed);
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
+
     }
 }
