@@ -43,6 +43,8 @@ namespace LibraryManagementSystem
 
             Console.WriteLine("====================================================================================================");
 
+            //retrieve books by author
+
             Console.WriteLine("Books by author  : ");
             SqlDataReader booksByAuthor = objLibrary.GetBooksByAuthor("RavindraNath Tagore");
 
@@ -51,6 +53,20 @@ namespace LibraryManagementSystem
                 Console.WriteLine("Title: " + booksByAuthor["Title"] + ", Author: " + booksByAuthor["Author"] + ", Genre: " + booksByAuthor["Genre"]);
             }
             booksByAuthor.Close();
+
+            Console.WriteLine("====================================================================================================");
+
+            //retrieve books by genre
+
+            Console.WriteLine("Books by Genre  : ");
+            SqlDataReader booksByGenre = objLibrary.GetBooksByGenre("Fiction");
+
+            while (booksByGenre.Read())
+            {
+                Console.WriteLine("Title: " + booksByGenre["Title"] + ", Author: " + booksByGenre["Author"] + ", Genre: " + booksByGenre["Genre"]);
+
+            }
+            booksByGenre.Close();
         }
     }
 }

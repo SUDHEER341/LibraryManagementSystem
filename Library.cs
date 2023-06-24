@@ -192,6 +192,20 @@ namespace LibraryManagementSystem
             return reader;
         }
 
+        //DISPLAY BOOKS BY GENRE
+        public SqlDataReader GetBooksByGenre(string genre)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
 
+            string get_Book_By_Genre = "select * from Books where Genre =@Genre";
+            SqlCommand command = new SqlCommand(get_Book_By_Genre, connection);
+            command.Parameters.AddWithValue("@Genre", genre);
+
+            SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+            return reader;
+
+        }
     }
 }
