@@ -207,5 +207,16 @@ namespace LibraryManagementSystem
             return reader;
 
         }
+        //Borrow book
+        public void BorrowBook(int bookId)
+        {
+            using (var command = new SqlCommand("update Books set IsBorrowed = 1 where BookId=@BookId", connection))
+            {
+                command.Parameters.AddWithValue("@BookId", bookId);
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
     }
 }
