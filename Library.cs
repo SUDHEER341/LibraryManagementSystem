@@ -37,53 +37,7 @@ namespace LibraryManagementSystem
                 Console.WriteLine("Book added successfully");
             }
         }
-        //COUNT TOTAL BOOKS 
-        public void TotalBooksCount()
-        {
-            int totalBooks = 0;
-            using (var command = new SqlCommand("select count(*) from Books", connection))
-            {
-                connection.Open();
-                totalBooks = (int)command.ExecuteScalar();
-                connection.Close();
-            }
-            
-            Console.WriteLine($"Total Books available in the Library : {totalBooks}");
-        }
-       
-
-        //DISPLAY TOTAL BOOKS IN LIBRARAY
-        public int  GetTotalBooksList()
-        {
-            TotalBooksCount();
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string query = "SELECT * FROM Books";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        Console.WriteLine("Books in the Library:");
-
-                        while (reader.Read())
-                        {
-                            int bookId = (int)reader["BookId"];
-                            string title = (string)reader["Title"];
-                            string author = (string)reader["Author"];
-                            string genre = (string)reader["Genre"];
-                            bool isBorrowed = (bool)reader["IsBorrowed"];
-
-                            Console.WriteLine("BookId: " + bookId + ", Title: " + title + ", Author: " + author + ", Genre: " + genre + ", IsBorrowed: " + isBorrowed);
-                        }
-                    }
-                }
-            }
-
-            return 0;
-        }
+        
         
 
     }
