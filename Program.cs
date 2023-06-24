@@ -36,6 +36,10 @@ namespace LibraryManagementSystem
             // display available books in library
 
             objLibrary.GetAvailableBooksList();
+
+            Console.WriteLine("====================================================================================================");
+            
+            objLibrary.GetBorrowedBooksList();
         }
     }
 }
