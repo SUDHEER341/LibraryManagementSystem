@@ -67,10 +67,17 @@ namespace LibraryManagementSystem
 
             }
             booksByGenre.Close();
+            Console.WriteLine("====================================================================================================");
 
             //Borrow a book 
             int bookId = 2;
             objLibrary.BorrowBook(bookId);
+
+            Console.WriteLine("====================================================================================================");
+
+            //Return a book
+            int bookId2 = 2;
+            objLibrary.ReturnBook(bookId2);
         }
     }
 }
