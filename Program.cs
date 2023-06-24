@@ -78,6 +78,24 @@ namespace LibraryManagementSystem
             //Return a book
             int bookId2 = 2;
             objLibrary.ReturnBook(bookId2);
+
+            Console.WriteLine("====================================================================================================");
+
+            // Retrieve and display details of a specific book
+            int bookId3 = 5;
+            Book bookDetails = objLibrary.GetBookDetails(bookId3);
+            if (bookDetails != null)
+            {
+                Console.WriteLine("Book Details:");
+                Console.WriteLine("Title: " + bookDetails.Title);
+                Console.WriteLine("Author: " + bookDetails.Author);
+                Console.WriteLine("Genre: " + bookDetails.Genre);
+                Console.WriteLine("Is Borrowed: " + bookDetails.IsBorrowed);
+            }
+            else
+            {
+                Console.WriteLine("Book not found!");
+            }
         }
     }
 }

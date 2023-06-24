@@ -229,5 +229,31 @@ namespace LibraryManagementSystem
                 connection.Close();
             }
         }
+
+        public Book GetBookDetails(int bookId)
+        {
+            Book book = null;
+
+            using (var command = new SqlCommand("SELECT * FROM Books WHERE BookId = @BookId", connection))
+            {
+                command.Parameters.AddWithValue("@BookId", bookId);
+                connection.Open();
+
+                var reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    string title = (string)reader["Title"];
+                    string author = (string)reader["Author"];
+                    string genre = (string)reader["Genre"];
+                    bool isAvailable = (bool)reader["IsBorrowed"];
+
+                    book = new Book(bookId, title, author, genre, isAvailable);
+                }
+
+                connection.Close();
+            }
+
+            return book;
+        }
     }
 }
